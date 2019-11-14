@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import utils.BrowserUtils;
@@ -35,20 +34,22 @@ public class RegistrationPage_tests extends BrowserUtils {
 	@Test
 	public void testRegistrationFunctionality_Positive() {
 		int expectedWaitTime = 10;
-//		String expectedTitle = ConfigurationReader.getProperty("expectedHomePageTitle");
-//		// navigating to the homepage
+		String expectedTitle = ConfigurationReader.getProperty("expectedHomePageTitle");
+		// navigating to the homepage
 		System.out.println("INFO -------------> Navigating to the homepage");
 		driver.get(ConfigurationReader.getProperty("homePageURL"));
 		
-		//waiting for the logo to load
-//		waitForVisibility(driver.findElement(By.xpath("//header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']")), driver, expectedWaitTime);   // error   //header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']
+		// waiting for the logo to load
+		waitForVisibility(driver.findElement(By.xpath("//header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']")), driver, expectedWaitTime);   // error   //header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']
 		
-//		// capturing and comparing the title
-//		String actualTitle = driver.getTitle();
-//		System.out.println("INFO -------------> Capturing the title from the page: " + actualTitle);
-//		Assert.assertTrue(actualTitle.contains(expectedTitle));
-//		System.out.println("INFO -------------> Compared with our expected title: " + expectedTitle);
+		// capturing and comparing the title
+		String actualTitle = driver.getTitle();
+		System.out.println("INFO -------------> Capturing the title from the page: " + actualTitle);
+		Assert.assertTrue(actualTitle.contains(expectedTitle));
+		System.out.println("INFO -------------> Compared with our expected title: " + expectedTitle);
 		
+		// removing pop up
+		driver.findElement(By.id("cn-accept-cookie")).click();
 		// capturing and going to the registration form
 		WebElement registrationButton = driver.findElement(By.xpath("//header[@class='banner navbar navbar-default navbar-static-top']//a[@title='Start your Yaware.TimeManager 14-days FREE TRIAL now!']")); // error  //header[@class='banner navbar navbar-default navbar-static-top']//a[@title='Start your Yaware.TimeManager 14-days FREE TRIAL now!']
 		System.out.println("INFO -------------> Waiting for button to become clickable");
@@ -74,7 +75,7 @@ public class RegistrationPage_tests extends BrowserUtils {
 			System.out.println("INFO -------------> Got the email - " + userID + emailExtention);
 			enterDataIntoField(userID + emailExtention, driver.findElement(By.id("registerEmail")), expectedWaitTime);
 			
-			//entering the data for password field
+			// entering the data for password field
 			String password = ConfigurationReader.getProperty("password");
 			System.out.println("INFO -------------> Got the password - " + password);
 			enterDataIntoField(password, driver.findElement(By.id("pwd1")), expectedWaitTime);  
@@ -111,23 +112,22 @@ public class RegistrationPage_tests extends BrowserUtils {
 		field.sendKeys(data);
 	}
 	
-	@Ignore
 	@Test
 	public void testLoginFunctionality_Negative() {
 		int expectedWaitTime = 10;
-//		String expectedTitle = ConfigurationReader.getProperty("expectedHomePageTitle");
+		String expectedTitle = ConfigurationReader.getProperty("expectedHomePageTitle");
 		// navigating to the homepage
 		System.out.println("INFO -------------> Navigating to the homepage");
 		driver.get(ConfigurationReader.getProperty("homePageURL"));
 		
-		//waiting for the logo to load
-//		waitForVisibility(driver.findElement(By.xpath("(//header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']")), driver, expectedWaitTime);   
+		// waiting for the logo to load
+		waitForVisibility(driver.findElement(By.xpath("//header[@class='banner navbar navbar-default navbar-static-top']//div[@id='logo']")), driver, expectedWaitTime);   
 		
 		// capturing and comparing the title
-//		String actualTitle = driver.getTitle();
-//		System.out.println("INFO -------------> Capturing the title from the page: " + actualTitle);
-//		Assert.assertTrue(actualTitle.contains(expectedTitle));
-//		System.out.println("INFO -------------> Compared with our expected title: " + expectedTitle);
+		String actualTitle = driver.getTitle();
+		System.out.println("INFO -------------> Capturing the title from the page: " + actualTitle);
+		Assert.assertTrue(actualTitle.contains(expectedTitle));
+		System.out.println("INFO -------------> Compared with our expected title: " + expectedTitle);
 		
 		// capturing and going to the login form
 		WebElement LoginButton = driver.findElement(By.xpath("//header[@class='banner navbar navbar-default navbar-static-top']//a[contains(text(),'Login')]"));
@@ -147,7 +147,7 @@ public class RegistrationPage_tests extends BrowserUtils {
 			System.out.println("INFO -------------> Got the user_mail - " + userEmail);
 			enterDataIntoField(userEmail, driver.findElement(By.id("email")), expectedWaitTime);
 			
-			//entering the data for password field
+			// entering the data for password field
 			String password = ConfigurationReader.getProperty("invalidUserPassword");
 			System.out.println("INFO -------------> Got the password - " + password);
 			enterDataIntoField(password, driver.findElement(By.id("password")), expectedWaitTime);  

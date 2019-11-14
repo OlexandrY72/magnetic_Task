@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,5 +27,9 @@ public class BrowserUtils {
 	public void waitForInvisability(WebElement element, WebDriver driver, int waitTime) {
 		newWait(waitTime, driver);
 		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+	
+	public void scrollingToElement(WebDriver driver, WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
 	}
 }
