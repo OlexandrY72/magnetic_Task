@@ -1,0 +1,8 @@
+/target/
+/test-output/
+.project
+*.html
+*.png
+*.xml
+.settings
+.classpath
