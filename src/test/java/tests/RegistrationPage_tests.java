@@ -158,7 +158,9 @@ public class RegistrationPage_tests extends BrowserUtils {
 			 
 			// waiting for a error message
 			String expectedErrorMessage = ConfigurationReader.getProperty("expectedErrorMessage");
-			String actualErrorMessage = driver.findElement(By.xpath("//div[@class='f-hint error']//span[@class='error-message']")).getText();
+			WebElement actualError = driver.findElement(By.xpath("//div[@class='f-hint error']//span[@class='error-message']"));
+			String actualErrorMessage = actualError.getText();
+			waitForVisibility(actualError, driver, expectedWaitTime);
 			Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
 			System.out.println("INFO -------------> Got the Error message");
 		} else {
